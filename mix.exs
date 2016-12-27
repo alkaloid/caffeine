@@ -24,9 +24,10 @@ defmodule Caffeine.Mixfile do
        :phoenix_html,
        :cowboy,
        :logger,
+       :slack,
        :gettext,
        :phoenix_ecto,
-       :postgrex
+       :postgrex,
      ]
    ]
   end
@@ -47,7 +48,8 @@ defmodule Caffeine.Mixfile do
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:slack, "~> 0.9.1"},
     ]
   end
 
