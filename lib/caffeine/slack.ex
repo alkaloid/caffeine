@@ -8,7 +8,7 @@ defmodule Caffeine.Slack do
   end
 
   def handle_event(message = %{type: "message"}, slack, state) do
-    send_message("I got a message!", message.channel, slack)
+    Logger.info "Received a message: #{inspect message}"
     {:ok, state}
   end
   def handle_event(event, _slack, state) do
