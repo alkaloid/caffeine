@@ -15,6 +15,7 @@ defmodule Caffeine do
       # Start your own worker by calling: Caffeine.Worker.start_link(arg1, arg2, arg3)
       # worker(Caffeine.Worker, [arg1, arg2, arg3]),
       supervisor(Slack.Bot, [Caffeine.Slack, [], Application.get_env(:slack, :api_token), %{name: :slack}]),
+      supervisor(Caffeine.DoorBell, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

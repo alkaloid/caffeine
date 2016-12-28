@@ -27,27 +27,7 @@ defmodule Caffeine.NotifyController do
   end
 
   def door_bell(conn, %{"door_id" => door_id}) do
-
-
-    door_info = @door_camera_map[String.to_integer(door_id)]
-
-    {:ok, response} = HTTPoison.get "#{@camera_url}#{door_info.camera_id}"
-    {:ok, image_path} = Briefly.create
-    File.write!(image_path, response.body)
-
-    text = "Knock knock! Someone is at the #{door_info.name}"
-
-    # Elixir Slack doesn't appear to support file uploads: https://github.com/BlakeWilliams/Elixir-Slack/issues/96
-    # Do this directly with HTTPoison instead
-    HTTPoison.post!(@slack_file_url, {:multipart,
-      [
-        {"token", Application.get_env(:slack, :api_token)},
-        {:file, image_path},
-        {"channels", @slack_channels},
-        {"title", "#{door_info.name} Snapshot"},
-        {"initial_comment", text},
-      ]
-    })
+    Caffeine.DoorBell.ring(door_id)
 
     conn
     |> put_status(:accepted)
