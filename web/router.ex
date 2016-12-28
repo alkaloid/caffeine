@@ -20,7 +20,10 @@ defmodule Caffeine.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Caffeine do
-  #   pipe_through :api
-  # end
+  scope "/api", Caffeine do
+    pipe_through :api
+
+    resources "/notify", NotifyController, only: [:create]
+    post "/door_bell", NotifyController, :door_bell
+  end
 end
