@@ -9,7 +9,7 @@ defmodule Caffeine do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Caffeine.Repo, []),
+      # supervisor(Caffeine.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Caffeine.Endpoint, []),
       # Start your own worker by calling: Caffeine.Worker.start_link(arg1, arg2, arg3)

@@ -18,11 +18,11 @@ defmodule Caffeine.Web do
 
   def model do
     quote do
-      use Ecto.Schema
+      #use Ecto.Schema
 
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
+      #import Ecto
+      #import Ecto.Changeset
+      #import Ecto.Query
     end
   end
 
@@ -31,8 +31,8 @@ defmodule Caffeine.Web do
       use Phoenix.Controller
 
       alias Caffeine.Repo
-      import Ecto
-      import Ecto.Query
+      #import Ecto
+      #import Ecto.Query
 
       import Caffeine.Router.Helpers
       import Caffeine.Gettext
@@ -66,8 +66,8 @@ defmodule Caffeine.Web do
       use Phoenix.Channel
 
       alias Caffeine.Repo
-      import Ecto
-      import Ecto.Query
+      #import Ecto
+      #import Ecto.Query
       import Caffeine.Gettext
     end
   end
