@@ -5,7 +5,7 @@ defmodule Caffeine.DoorBell do
   
   @name :door_bell
   @slack_file_url "https://slack.com/api/files.upload" 
-  @slack_channels "@bklang" # comma separated
+  @slack_channels Application.get_env(:caffeine, :doorbell_notifies) # comma separated
   @camera_url "http://krog.local/cgi-bin/nph-zms?mode=single&monitor="
   @door_camera_map %{
     1 => %{name: "Central - Front Door", camera_id: 5},

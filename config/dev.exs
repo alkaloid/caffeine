@@ -41,3 +41,6 @@ config :caffeine, Caffeine.Repo,
   database: "caffeine_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :caffeine,
+  doorbell_notifies: "@bklang"

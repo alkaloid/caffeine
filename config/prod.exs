@@ -58,4 +58,8 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
+
+config :caffeine,
+  doorbell_notifies: "#general"
+
 import_config "prod.secret.exs"
