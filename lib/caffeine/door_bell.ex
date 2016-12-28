@@ -31,6 +31,8 @@ defmodule Caffeine.DoorBell do
 
     {:ok, response} = HTTPoison.get "#{@camera_url}#{door_info.camera_id}"
     {:ok, image_path} = Briefly.create
+    # FIXME: Briefly only cleans up on Briefly application exit. We are likely leaking
+    # both files and memory (FDs, list of temp files in ets)
     File.write!(image_path, response.body)
 
     text = "Knock knock! Someone is at the #{door_info.name}"
