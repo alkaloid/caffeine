@@ -28,6 +28,7 @@ defmodule Caffeine.Mixfile do
        :gettext,
        :phoenix_ecto,
        :postgrex,
+       :briefly,
      ]
    ]
   end
@@ -50,6 +51,7 @@ defmodule Caffeine.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:slack, "~> 0.9.1"},
+      {:briefly, "~> 0.3"},
     ]
   end
 

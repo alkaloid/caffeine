@@ -24,5 +24,6 @@ defmodule Caffeine.Router do
     pipe_through :api
 
     resources "/notify", NotifyController, only: [:create]
+    post "/door_bell", NotifyController, :door_bell
   end
 end
