@@ -13,6 +13,7 @@ defmodule Caffeine.DoorBell do
     3 => %{name: "West Wing - Front Door", camera_id: 6},
     4 => %{name: "Central - Back Door", camera_id: 3},
   }
+  @missing_camera_image "attachments/missing_camera.png"
 
   @doc """
     Handles long-running Slack API requests in a separate actor so that
@@ -29,11 +30,16 @@ defmodule Caffeine.DoorBell do
   def handle_cast({:ring, door_id}, _) do
     door_info = @door_camera_map[String.to_integer(door_id)]
 
-    {:ok, response} = HTTPoison.get "#{@camera_url}#{door_info.camera_id}"
-    {:ok, image_path} = Briefly.create
-    # FIXME: Briefly only cleans up on Briefly application exit. We are likely leaking
-    # both files and memory (FDs, list of temp files in ets)
-    File.write!(image_path, response.body)
+    case HTTPoison.get "#{@camera_url}#{door_info.camera_id}?apiKey=#{@camera_api_key}" do
+      {:ok, response} ->
+        # FIXME: Briefly only cleans up on Briefly application exit. We are likely leaking
+        # both files and memory (FDs, list of temp files in ets)
+        {:ok, image_path} = Briefly.create
+        File.write!(image_path, response.body)
+      {:error, error} ->
+        Logger.error "Unable to fetch camera image for door #{door_info.name}: #{inspect error.reason}"
+        image_path = "#{Application.app_dir(:caffeine, "priv")}/#{@missing_camera_image}"
+    end
 
     text = "Knock knock! Someone is at the #{door_info.name}"
 
