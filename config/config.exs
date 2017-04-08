@@ -23,6 +23,7 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :slack, api_token: System.get_env("SLACK_TOKEN")
+config :caffeine, unifi_nvr_api_key: System.get_env("UNIFI_NVR_API_KEY")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

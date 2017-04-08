@@ -18,3 +18,6 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+* https://www.reddit.com/r/Ubiquiti/comments/43v23u/using_letsencrypt_with_the_unifi_controller/
+* https://spiderwebsolutions.com.au/ubiquiti-unifi-video-airvision-custom-ssl-certificate/
