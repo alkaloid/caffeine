@@ -6,11 +6,12 @@ defmodule Caffeine.DoorBell do
   @name :door_bell
   @slack_file_url "https://slack.com/api/files.upload" 
   @slack_channels Application.get_env(:caffeine, :doorbell_notifies) # comma separated
-  @camera_url "http://krog.local/cgi-bin/nph-zms?mode=single&monitor="
+  @camera_url "http://localhost:7080/api/2.0/snapshot/camera/"
+  @unifi_nvr_api_key Application.get_env(:caffeine, :unifi_nvr_api_key)
   @door_camera_map %{
     1 => %{name: "Central - Front Door", camera_id: 5},
-    2 => %{name: "Central - Side Door", camera_id: 5},
-    3 => %{name: "West Wing - Front Door", camera_id: 6},
+    2 => %{name: "Central - Side Door", camera_id: "58e79fa2e01219fe05bd1ea0"},
+    3 => %{name: "West Wing - Front Door", camera_id: "58e79fa2e01219fe05bd1ea0"},
     4 => %{name: "Central - Back Door", camera_id: 3},
   }
   @missing_camera_image "attachments/missing_camera.png"
@@ -30,7 +31,7 @@ defmodule Caffeine.DoorBell do
   def handle_cast({:ring, door_id}, _) do
     door_info = @door_camera_map[String.to_integer(door_id)]
 
-    case HTTPoison.get "#{@camera_url}#{door_info.camera_id}?apiKey=#{@camera_api_key}" do
+    case HTTPoison.get "#{@camera_url}#{door_info.camera_id}?apiKey=#{@unifi_nvr_api_key}" do
       {:ok, response} ->
         # FIXME: Briefly only cleans up on Briefly application exit. We are likely leaking
         # both files and memory (FDs, list of temp files in ets)
