@@ -12,7 +12,7 @@ defmodule Caffeine.DoorBell do
     1 => %{name: "Central - Front Door", camera_id: 5},
     2 => %{name: "Central - Side Door", camera_id: "58e79fa2e01219fe05bd1ea0"},
     3 => %{name: "West Wing - Front Door", camera_id: "58e79fa2e01219fe05bd1ea0"},
-    4 => %{name: "Central - Back Door", camera_id: 3},
+    4 => %{name: "Central - Back Door", camera_id: "58e81ad2e012920482cfd0a9"},
   }
   @missing_camera_image "attachments/missing_camera.png"
 
