@@ -31,16 +31,17 @@ defmodule Caffeine.DoorBell do
   def handle_cast({:ring, door_id}, _) do
     door_info = @door_camera_map[String.to_integer(door_id)]
 
-    case HTTPoison.get "#{@camera_url}#{door_info.camera_id}?force=true&apiKey=#{@unifi_nvr_api_key}" do
+    image_path = case HTTPoison.get "#{@camera_url}#{door_info.camera_id}?force=true&apiKey=#{@unifi_nvr_api_key}" do
       {:ok, response} ->
         # FIXME: Briefly only cleans up on Briefly application exit. We are likely leaking
         # both files and memory (FDs, list of temp files in ets)
         {:ok, image_path} = Briefly.create
         File.write!(image_path, response.body)
         Logger.debug "Image saved from camera server for door #{door_info.name}"
+        image_path
       {:error, error} ->
         Logger.error "Unable to fetch camera image for door #{door_info.name}: #{inspect error.reason}"
-        image_path = "#{Application.app_dir(:caffeine, "priv")}/#{@missing_camera_image}"
+        "#{Application.app_dir(:caffeine, "priv")}/#{@missing_camera_image}"
     end
 
     text = "Knock knock! Someone is at the #{door_info.name}"
