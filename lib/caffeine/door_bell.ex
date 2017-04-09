@@ -9,7 +9,7 @@ defmodule Caffeine.DoorBell do
   @camera_url "http://localhost:7080/api/2.0/snapshot/camera/"
   @unifi_nvr_api_key Application.get_env(:caffeine, :unifi_nvr_api_key)
   @door_camera_map %{
-    1 => %{name: "Central - Front Door", camera_id: 5},
+    1 => %{name: "Central - Front Door", camera_id: "58ea6cf4e012f06268543108"},
     2 => %{name: "Central - Side Door", camera_id: "58e79fa2e01219fe05bd1ea0"},
     3 => %{name: "West Wing - Front Door", camera_id: "58e79fa2e01219fe05bd1ea0"},
     4 => %{name: "Central - Back Door", camera_id: "58e81ad2e012920482cfd0a9"},
